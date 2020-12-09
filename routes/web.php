@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/teacher', 'HomeController@teacher')->name('teacher');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
-    Route::resource('users','UserController');
+    Route::resource('users','UserController')->middleware('permission:role-create', ['only' => ['create','store']]);
     Route::resource('products','ProductController');
+    Route::get('/users/{id}/fees', 'UserController@fees')->name('users.fee');
 });

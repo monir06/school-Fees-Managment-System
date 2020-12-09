@@ -4,12 +4,13 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\User;
-use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
+use App\User;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -21,8 +22,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+        return view('users.index',compact('data','user'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -80,6 +82,19 @@ class UserController extends Controller
         return view('users.show',compact('user'));
     }
 
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function fees($id)
+    {
+        $user = User::find($id);
+        return view('users.fees',compact('user'));
+    }
 
     /**
      * Show the form for editing the specified resource.

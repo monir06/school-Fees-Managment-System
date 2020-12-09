@@ -2,18 +2,15 @@
 
 
 @section('content')
-<div class="row justify-content-center">
-<div class="col-lg-12 text-center">
-@if ($message = Session::get('success'))
-      <div class="alert alert-success">
-        <p class="font-weight-bold text-center">{{ $message }}</p>
-      </div>
-@endif
-</div>
-</div>
-<div class="container">
-  <div class="row">
 
+<div class="container">
+  @if ($message = Session::get('success'))
+  <div class="alert alert-success">
+    <p>{{ $message }}</p>
+  </div>
+  @endif
+
+  <div class="row">
     <div class="col-lg-12 margin-tb">
       <h2 class="title1 m-b-md">Welcome {{ Auth::user()->name }},
         @if(!empty(Auth::user()->getRoleNames()))
@@ -23,8 +20,7 @@
         @endif
       </h2>
     </div>
-  </div>
-
+</div>
 
 
 
@@ -41,42 +37,49 @@
     <div class="col-9">
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-            <div class="float-left">
-              <h3 class="font-weight-bold">Users</h3>
+            <div class="pull-left">
+                <h2 class="font-weight-bold"> Naveen Fees</h2>
             </div>
-            <div class="float-right m-b-md">
-              <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-            </div>
-            <table class="table">
-              <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th width="280px">Action</th>
-              </tr>
-              @foreach ($data as $key => $user)
-              <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>
-                  @if(!empty($user->getRoleNames()))
-                    @foreach($user->getRoleNames() as $v)
-                        <label class="badge badge-success">{{ $v }}</label>
-                    @endforeach
-                  @endif
-                </td>
-                <td width="280px">
-                    <a class="btn btn-info text-white" href="{{ route('users.show',$user->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                    <a class="btn btn-primary" href="{{ route('users.fee',$user->id) }}">Show Fees</a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                </td>
-              </tr>
-              @endforeach
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <td>Testing</td>
+                    <td>sdf</td>
+                    <td>10000</td>
+                    <td>NOT PAID</td>
+                  </tr>
+                  <tr>
+                    <th>2</th>
+                    <td>Testing</td>
+                    <td>Something</td>
+                    <td>400</td>
+                    <td>PAID</td>
+                  </tr>
+                  <tr>
+                    <th>3</th>
+                    <td>Fee2</td>
+                    <td>alsdkj</td>
+                    <td>300</td>
+                    <td>PAID</td>
+                  </tr>
+                  <tr>
+                    <th>5</th>
+                    <td>Annual Fee</td>
+                    <td>Something about it</td>
+                    <td>100</td>
+                    <td>PAID</td>
+                  </tr>
+                </tbody>
             </table>
         </div>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -174,7 +177,5 @@
     </div>
   </div>
 </div>
-
-
 
 @endsection

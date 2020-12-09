@@ -59,7 +59,7 @@
                         <td>PAID</td>
                       </tr>
                     </tbody>
-                  </table>
+                </table>
             </div>
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <div class="row">
@@ -154,7 +154,7 @@
             {{-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> --}}
           </div>
         </div>
-      </div>
+    </div>
     
 </div>
 @endsection
